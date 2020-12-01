@@ -20,6 +20,7 @@ import pt.iade.unimanage.models.Student;
 import pt.iade.unimanage.models.StudentRepository;
 import pt.iade.unimanage.models.Unit;
 import pt.iade.unimanage.models.UnitRepository;
+import pt.iade.unimanage.models.exceptions.AlreadyExistsException;
 
 @RestController
 @RequestMapping(path="/api/students")
@@ -53,7 +54,7 @@ public class StudentController {
         return new Response(number + " was deleted.",null);
         else
         return new Response(number + " not found.",null);
- }
+    }
     
     @PostMapping(path = "", produces= MediaType.APPLICATION_JSON_VALUE)
     public Student addStudent(@RequestBody Student student) {
@@ -150,7 +151,7 @@ public class StudentController {
             if (unit != null) { 
                 
                 if (student.getEnrolmentByUnitId(unitId)!=null) 
-                throw new Exception("" + unitId);
+                throw new AlreadyExistsException ("" + unitId, "Unit", "Id");
             else {
                 Enrolment enrolment = new Enrolment(student, unit, -1);
                 student.enroll(enrolment);
@@ -160,5 +161,5 @@ public class StudentController {
             throw new NotFoundException("" + unitId);
     } else
         throw new NotFoundException("" + number);
-}
+    }
 }
