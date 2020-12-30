@@ -15,5 +15,9 @@ public abstract class Person {
         this.birthDay = birthDay;
     }
     
-    public abstract String getReference(); 
+    public abstract String getReference();
+
+    public abstract String getName();
+    
+    public abstract String getEmail();
 }

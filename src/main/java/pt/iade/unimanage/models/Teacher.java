@@ -28,5 +28,19 @@ public class Teacher extends Person {
         return "T<"+mecNumber+">";
     }
 
+    @Override
+    public String getName() {  
+        return name;
+    }
+
+    @Override
+    public String getEmail() {
+        return email;
+    }
+
+	public void assignUnit(Unit unit) {
+        units.add(unit);
+	}
+
     
 }

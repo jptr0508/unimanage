@@ -7,7 +7,6 @@ import java.util.List;
 
 public class TeacherRepository {
     private static ArrayList<Teacher> teachers = new ArrayList<Teacher>();
-    private static ArrayList<Unit> units = new ArrayList<Unit>();
 
     public static void populate() {
         Teacher t; // auxiliary variable
@@ -30,9 +29,24 @@ public class TeacherRepository {
         return null;
     }
 
-    public static List<Unit> getTeacherUnits() {return units;}
+    public static ArrayList<Unit> getTeacherUnits(int mecNumber) {
+        for (Teacher teacher : teachers)
+            if (teacher.getMecNumber() == mecNumber)
+                return teacher.getUnits();
+        return null;
+    }
 
-    //public static boolean deleteUnit() {}
+	public static boolean deleteUnit(Unit unit, int mecNumber) {
+		for (Teacher teacher : teachers)
+            if (teacher.getMecNumber() == mecNumber)
+                teacher.getUnits().remove(unit);
+        return false;
+	}
 
-    //public static Unit addUnit(Unit unit) {}
+    public static Unit addUnit(int mecNumber, Unit unit) {
+        for (Teacher teacher : teachers)
+            if (teacher.getMecNumber() == mecNumber)
+                teacher.getUnits().add(unit);
+        return null;
+    }
 }

@@ -6,4 +6,7 @@ public class UnitRepository {
 		return null;
 	}
 
+	public static void unassignTeacher(int unitId) {
+	}
+
 }
