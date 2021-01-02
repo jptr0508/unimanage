@@ -3,7 +3,7 @@ package pt.iade.unimanage.models;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class Student extends Person{ 
+public class Student extends Person implements Statistical{ 
     private static int nextNumber = 0;
     private String name;
     private LocalDate birthDate;
@@ -72,5 +72,41 @@ public class Student extends Person{
     @Override
     public String getReference() {
         return "S<"+number+">";
+    }
+
+    @Override
+    public double getAverage(){
+        double sum = 0; int n = 0;
+        for(Enrolment enr: enrolments)
+        if(enr.getGrade() > 0){
+            n++;
+            sum += enr.getGrade();
+        }
+        return sum / n;
+    }
+
+    @Override
+    public double getMax(){
+        double max = 0;
+        for(Enrolment enr: enrolments)
+        if(enr.getGrade() > max){
+            max = enr.getGrade();
+        }
+        return max;
+    }
+
+    @Override
+    public double getMin(){
+        double min = Double.MAX_VALUE;
+        for (Enrolment enr : enrolments) 
+        if (enr.getGrade() > 0 && enr.getGrade() < min) {
+            min = enr.getGrade();
+        }
+        return min;
+    }
+
+    @Override
+    public HistogramSlot[] getHistogram(int nSlots) {
+        return null;
     }
 }
